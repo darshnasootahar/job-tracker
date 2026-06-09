@@ -1,0 +1,142 @@
+{
+  "name": "Job Application Follow-up Reminder",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            },
+            {
+              "triggerAtHour": 9
+            },
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2750331a-3c88-4e5c-ac19-49d7c2018f19",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM jobs \nWHERE status = 'Applied' \nAND apply_date <= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\nAND reminder_sent = 0",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.5,
+      "position": [
+        208,
+        0
+      ],
+      "id": "7032ccaa-bf5c-4672-8a5a-6d10dc613e9d",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "mySql": {
+          "id": "JYnOOFNblZcWpDSn",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "darshnaom178@gmail.com",
+        "subject": "=Follow-up Reminder: {{ $json.company }}",
+        "message": "=Hi!  Time to follow up on this application:  Company:  {{ $json.company }} Role:     {{ $json.role }} Applied:  {{ $json.apply_date }} Status:   {{ $json.status }}  It has been 7 days - send a follow-up email today!  Good luck! - Job Tracker Automation",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "2465204d-ec83-4ea3-8118-c01cd0d5b79c",
+      "name": "Send a message",
+      "webhookId": "498a54fb-9175-4249-9977-bd5b65c90438",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Yv3H0Bv93MP9Y9XP",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE jobs \nSET reminder_sent = 1 \nWHERE id = {{ $('Execute a SQL query').item.json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.5,
+      "position": [
+        624,
+        0
+      ],
+      "id": "46c5c6b5-3b2d-499a-a0fb-3f7d9945ce81",
+      "name": "Execute a SQL query1",
+      "credentials": {
+        "mySql": {
+          "id": "JYnOOFNblZcWpDSn",
+          "name": "MySQL account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "a10b50ad-797d-44af-ab2f-07eeb28b779e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "19c42c3a1cba1a39a7bd0cfa76e10f68b854d0553a35aa8709b9ec117236a9dc"
+  },
+  "nodeGroups": [],
+  "id": "cTRKNRMj1l5iVKbV",
+  "tags": []
+}

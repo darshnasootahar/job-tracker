@@ -1,0 +1,104 @@
+<!-- job tracker dashboard -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobTrack - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="jt-wrap">
+
+    <!-- Sidebar -->
+    <aside class="jt-sidebar">
+        <div class="jt-logo">Job<span>Track</span></div>
+        <a href="index.html" class="jt-nav active"><i class="ti ti-layout-dashboard"></i> Dashboard</a>
+        <a href="add-job.html" class="jt-nav"><i class="ti ti-plus"></i> Add Application</a>
+        <div class="jt-automation">
+            <div class="jt-auto-label">n8n automation</div>
+            <div class="jt-auto-status">
+                <span class="jt-dot-green"></span> Active
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="jt-main">
+
+        <!-- Top Bar -->
+        <div class="jt-topbar">
+            <div class="jt-title">Dashboard</div>
+            <a href="add-job.html" class="jt-addbtn">
+                <i class="ti ti-plus"></i> Add Application
+            </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="jt-stats" id="statsRow">
+            <div class="jt-stat">
+                <div class="jt-stat-label">Total Applied</div>
+                <div class="jt-stat-val" id="statTotal">0</div>
+                <div class="jt-stat-sub">all applications</div>
+            </div>
+            <div class="jt-stat">
+                <div class="jt-stat-label">Interviews</div>
+                <div class="jt-stat-val" id="statInterview">0</div>
+                <div class="jt-stat-sub">in progress</div>
+            </div>
+            <div class="jt-stat">
+                <div class="jt-stat-label">Offers</div>
+                <div class="jt-stat-val" id="statOffer">0</div>
+                <div class="jt-stat-sub">received</div>
+            </div>
+            <div class="jt-stat">
+                <div class="jt-stat-label">Rejected</div>
+                <div class="jt-stat-val" id="statRejected">0</div>
+                <div class="jt-stat-sub">closed</div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="jt-table-wrap">
+            <div class="jt-table-head">
+                <div class="jt-table-headtitle">Recent Applications</div>
+                <div class="jt-filter">
+                    <button class="jt-chip active" onclick="filterJobs('All', this)">All</button>
+                    <button class="jt-chip" onclick="filterJobs('Applied', this)">Applied</button>
+                    <button class="jt-chip" onclick="filterJobs('Interview', this)">Interview</button>
+                    <button class="jt-chip" onclick="filterJobs('Offer', this)">Offer</button>
+                    <button class="jt-chip" onclick="filterJobs('Rejected', this)">Rejected</button>
+                </div>
+            </div>
+
+            <div class="jt-table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company & Role</th>
+                            <th>Status</th>
+                            <th>Applied Date</th>
+                            <th>Deadline</th>
+                            <th>Job Link</th>
+                            <th>Notes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jobList">
+                        <tr>
+                            <td colspan="7" class="jt-empty">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

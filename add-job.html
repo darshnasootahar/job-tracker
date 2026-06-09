@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobTrack - Add Application</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="jt-wrap">
+
+    <!-- Sidebar -->
+    <aside class="jt-sidebar">
+        <div class="jt-logo">Job<span>Track</span></div>
+        <a href="index.html" class="jt-nav"><i class="ti ti-layout-dashboard"></i> Dashboard</a>
+        <a href="add-job.html" class="jt-nav active"><i class="ti ti-plus"></i> Add Application</a>
+        <div class="jt-automation">
+            <div class="jt-auto-label">n8n automation</div>
+            <div class="jt-auto-status">
+                <span class="jt-dot-green"></span> Active
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="jt-main">
+
+        <div class="jt-topbar">
+            <div class="jt-title">Add Application</div>
+            <a href="index.html" class="jt-backbtn">
+                <i class="ti ti-arrow-left"></i> Back
+            </a>
+        </div>
+
+        <div class="jt-form-card">
+
+            <div class="jt-form-grid">
+
+                <div class="jt-field">
+                    <label class="jt-label">Company Name *</label>
+                    <input type="text" id="company" class="jt-input" placeholder="e.g. Google" />
+                </div>
+
+                <div class="jt-field">
+                    <label class="jt-label">Role / Position *</label>
+                    <input type="text" id="role" class="jt-input" placeholder="e.g. Frontend Developer" />
+                </div>
+
+                <div class="jt-field">
+                    <label class="jt-label">Status</label>
+                    <select id="status" class="jt-input">
+                        <option>Applied</option>
+                        <option>Interview</option>
+                        <option>Offer</option>
+                        <option>Rejected</option>
+                    </select>
+                </div>
+
+                <div class="jt-field">
+                    <label class="jt-label">Apply Date *</label>
+                    <input type="date" id="apply_date" class="jt-input" />
+                </div>
+
+                <div class="jt-field">
+                    <label class="jt-label">Deadline</label>
+                    <input type="date" id="deadline" class="jt-input" />
+                </div>
+
+                <div class="jt-field">
+                    <label class="jt-label">Job Link</label>
+                    <input type="text" id="job_link" class="jt-input" placeholder="https://..." />
+                </div>
+
+            </div>
+
+            <div class="jt-field" style="margin-top: 16px;">
+                <label class="jt-label">Notes</label>
+                <textarea id="notes" class="jt-input jt-textarea" placeholder="Any notes about this application..."></textarea>
+            </div>
+
+            <div class="jt-form-actions">
+                <a href="index.html" class="jt-cancelbtn">Cancel</a>
+                <button onclick="addJob()" class="jt-savebtn">
+                    <i class="ti ti-device-floppy"></i> Save Application
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
